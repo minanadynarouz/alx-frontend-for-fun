@@ -1,10 +1,14 @@
-from sys import argv
-from os.path import exists
+#!/usr/bin/python3
+''' Markdown to HTML '''
+from os import path
+import sys
 
-script, input_file, output_file = argv
+if __name__ == "__main__":
+    '''Check the file and input validity'''
+    if len(sys.argv) != 3:
+        print('Usage: ./markdown2html.py README.md README.html', file=sys.stderr)
+        exit(1)
 
-if (len(argv) != 3):
-    print("Usage: ./markdown2html.py README.md README.html")
-    exit(1)
-elif (input_file.endswith('.md') or not exists(input_file)):
-    print("Missing <filename>")
+    if not path.exists(sys.argv[1]):
+        print('Missing {}'.format(sys.argv[1]), file=sys.stderr)
+        exit(1)
