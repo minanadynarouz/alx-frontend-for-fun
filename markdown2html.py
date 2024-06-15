@@ -24,9 +24,10 @@ def convert_to_html(in_file, out_file):
 
 
 def main():
-    # Check if the number of arguments is correct
+    ''' Check if the number of arguments is correct '''
     if len(sys.argv) != 3:
-        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+        print("Usage: ./markdown2html.py README.md README.html",
+              file=sys.stderr)
         sys.exit(1)
 
     input_file = sys.argv[1]
