@@ -1,34 +1,43 @@
 #!/usr/bin/python3
-
-"""
-A script to convert a Markdown file to an HTML file.
-"""
+'''Markdown to HTML'''
 
 import sys
-import os
-import markdown
+import os.path as path
+
+
+def convert_to_html(in_file, out_file):
+    '''
+    Convert markdown to HTML
+    '''
+    html = []
+    with open(in_file, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.rstrip()
+            if line.startswith('#'):
+                level = len(line.split(' ')[0])
+                header_content = line[level:].strip()
+                html.append(f"<h{level}>{header_content}</h{level}>\n")
+
+    with open(out_file, "w") as f:
+        f.write(''.join(html))
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+    '''Check if the number of arguments is correct'''
+    if len(sys.argv) != 3:
+        print("Usage: ./markdown2html.py README.md README.html",
+              file=sys.stderr)
         sys.exit(1)
 
-    markdown_file = sys.argv[1]
-    html_file = sys.argv[2]
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
 
-    if not os.path.isfile(markdown_file):
-        print(f"Missing {markdown_file}", file=sys.stderr)
+    if not path.exists(input_file):
+        print(f"Missing {input_file}", file=sys.stderr)
         sys.exit(1)
 
-    with open(markdown_file, 'r', encoding='utf-8') as f:
-        markdown_content = f.read()
-
-    html_content = markdown.markdown(markdown_content)
-
-    with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(html_content)
-
+    convert_to_html(input_file, output_file)
     sys.exit(0)
 
 
