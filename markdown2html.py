@@ -24,22 +24,33 @@ def convert_to_html(in_file, out_file):
     Convert markdown to HTML
     '''
     html = []
+    inside_list = False  # State variable to track if we are inside a list
+
     with open(in_file, "r") as f:
         lines = f.readlines()
         for line in lines:
             line = line.rstrip()
             if line.startswith('#'):
+                if inside_list:
+                    html.append('</ul>\n')
+                    inside_list = False
                 level = len(line.split(' ')[0])
                 header_content = line[level:].strip()
                 html.append(f"<h{level}>{header_content}</h{level}>\n")
             elif line.startswith('-'):
-                items = line.split('- ')[1:]
-                html.append('<ul>\n\t')
-                for item in items:
-                    html.append(f'\t<li>{item}</li>')
-                html.append('\n\t</ul>')
+                if not inside_list:
+                    html.append('<ul>\n')
+                    inside_list = True
+                item_content = line[1:].strip()
+                html.append(f'\t<li>{item_content}</li>\n')
             else:
+                if inside_list:
+                    html.append('</ul>\n')
+                    inside_list = False
                 html.append(f'{line}\n')
+
+    if inside_list:
+        html.append('</ul>\n')
 
     with open(out_file, "w") as f:
         f.write(''.join(html))
@@ -48,7 +59,7 @@ def convert_to_html(in_file, out_file):
 if __name__ == '__main__':
 
     if len(sys.argv) < 3:
-        print('Usage: ./markdown2html.py README.md README.html', file=sys.stderr)
+        print('Usage: ./markdown2html.py README.md README.html')
         sys.exit(1)
 
     input_file = sys.argv[1]
@@ -62,4 +73,3 @@ if __name__ == '__main__':
 
     # Convert the markdown file to HTML
     convert_to_html(input_file, output_file)
-
