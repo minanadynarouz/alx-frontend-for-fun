@@ -32,6 +32,12 @@ def convert_to_html(in_file, out_file):
                 level = len(line.split(' ')[0])
                 header_content = line[level:].strip()
                 html.append(f"<h{level}>{header_content}</h{level}>\n")
+            elif line.startswith('-'):
+                items = line.split('- ')[1:]
+                html.append('<ul>\n\t')
+                for item in items:
+                    html.append(f'\t<li>{item}</li>')
+                html.append('\n\t</ul>')
             else:
                 html.append(f'{line}\n')
 
