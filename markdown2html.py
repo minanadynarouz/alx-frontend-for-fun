@@ -19,29 +19,24 @@ import sys
 import string
 
 
-def convert_md_to_html(input_file, output_file):
+def convert_to_html(in_file, out_file):
     '''
-    Converts markdown file to HTML file
+    Convert markdown to HTML
     '''
-    # Read the contents of the input file
-    with open(input_file, encoding='utf-8') as f:
-        md_content = f.readlines()
+    html = []
+    with open(in_file, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.rstrip()
+            if line.startswith('#'):
+                level = len(line.split(' ')[0])
+                header_content = line[level:].strip()
+                html.append(f"<h{level}>{header_content}</h{level}>\n")
+            else:
+                html.append(f'{line}\n')
 
-    html_content = []
-    for line in md_content:
-        # Check if the line is a heading
-        hashes = re.findall(r'#', line)
-        h_content = re.findall(r'\w', line)
-        if hashes:
-            h_level = len(hashes)
-            # Append the HTML equivalent of the heading
-            html_content.append(f'<h{h_level}>{"".join(h_content)}</h{h_level}>\n')
-        else:
-            html_content.append(line)
-
-    # Write the HTML content to the output file
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.writelines(html_content)
+    with open(out_file, "w") as f:
+        f.write(''.join(html))
 
 
 if __name__ == '__main__':
@@ -55,5 +50,5 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Convert the markdown file to HTML
-    convert_md_to_html(input_file, output_file)
+    convert_to_html(input_file, output_file)
 
