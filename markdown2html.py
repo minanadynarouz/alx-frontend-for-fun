@@ -26,6 +26,13 @@ def convert_to_html(in_file, out_file):
     html = []
     inside_list = False  # State variable to track if we are inside a list
     previous_line = ''
+    inside_para = False
+
+    def close_paragraph():
+        nonlocal inside_para
+        if inside_para:
+            html.append("</p>\n")
+            inside_para = False
 
     with open(in_file, "r") as f:
         lines = f.readlines()
@@ -54,8 +61,19 @@ def convert_to_html(in_file, out_file):
                 elif inside_list:
                     html.append('</ol>\n')
                     inside_list = False
-                html.append(f'{line}\n')
+
+                if line.strip():
+                    if not inside_para:
+                        html.append('<p>\n')
+                        inside_para = True
+                    else:
+                        html.append("<br/>\n")
+                    html.append(f"{line}\n")
+                else:
+                    close_paragraph()
             previous_line = line
+
+    close_paragraph()
 
     with open(out_file, "w") as f:
         f.write(''.join(html))
