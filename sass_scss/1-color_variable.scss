@@ -2,7 +2,10 @@
 
 $lightGray: #3D3D3D;
 
-body,
+body {
+  color: $lightGray;
+}
+
 p {
   color: $lightGray;
 }
