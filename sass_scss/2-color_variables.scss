@@ -1,0 +1,17 @@
+/* Assign using Variables */
+
+$darkGrey: #3D3D3D;
+$lightGrey: #6D6D6D;
+
+body {
+  color: $darkGrey;
+  background-color: $lightGrey;
+}
+
+p {
+  color: $darkGrey;
+}
+
+h2 {
+  background-color: $lightGrey;
+}
