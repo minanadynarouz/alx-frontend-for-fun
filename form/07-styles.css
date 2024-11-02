@@ -201,14 +201,14 @@ template {
   --color-white: #ffffff;
   --color-grey: #a0a0a0;
   --color-light-grey: #f3f3f3;
-  --color-dark-grey: #353535;
   --color-red: #cd3e65;
   --color-green: #08805b;
+  --color-dark-grey: #353535;
 
   --text-color: var(--color-black);
-
   --valid-color: var(--color-green);
   --error-color: var(--color-red);
+
   --font-family-base: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-family-title: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
@@ -342,12 +342,12 @@ a:active {
 
 .button-primary {
   color: var(--color-white);
-  background-color: var(--color-primary);
+  background: var(--color-primary);
 }
 
 .button-primary:hover {
   color: var(--color-primary);
-  background-color: var(--color-white);
+  background: var(--color-white);
 }
 
 /* Helpers
@@ -849,8 +849,7 @@ ul.row {
 
 /*** FORM ***/
 /* Comment section
-    ============================= */
-
+      =============================== */
 .post-comments {
   width: 80%;
   margin: 10rem 0 0 auto;
@@ -861,9 +860,8 @@ ul.row {
   font-variant: small-caps;
 }
 
-/* Basic form
-    ============================= */
-
+/* Basic form 
+      ================================ */
 form {
   display: flex;
   flex-direction: column;
@@ -875,19 +873,16 @@ fieldset {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: none;
+  border: 0;
   padding: 0 0 2rem;
 }
-
-/* Labels
-    ============================= */
 
 label {
   cursor: pointer;
   display: block;
-  font-size: 1.4rem;
-  padding: 0 0 0.5rem;
   white-space: nowrap;
+  font-size: 1.4rem;
+  padding: 0 0 .5rem;
 }
 
 input[type=text],
@@ -897,7 +892,7 @@ textarea {
   width: 100%;
   padding: 1.2rem;
   line-height: 1;
-  border: 0.1rem solid var(--color-black);
+  border: .1rem solid var(--color-black);
   background-color: var(--color-white);
   box-shadow: none;
   outline: 0;
@@ -911,20 +906,17 @@ input[type=email] {
 input[type=text]:focus,
 input[type=email]:focus,
 textarea:focus {
-  border: 0.1rem solid var(--color-grey);
+  border: .1rem solid var(--color-grey);
   background-color: var(--color-light-grey);
 }
 
-input[type=text]::placeholder,
-input[type=email]::placeholder,
-textarea::placeholder {
+::placeholder {
   font-style: italic;
   font-size: var(--font-size-small);
 }
 
 /* Form group
-============================= */
-
+      ============================= */
 .form-group {
   padding: 1rem;
   margin: 0;
@@ -933,12 +925,11 @@ textarea::placeholder {
 
 .form-group:focus-within {
   background-color: var(--color-light-grey);
-  transition: 0.3s;
+  transition: .3s;
 }
 
 /* Form field
-============================= */
-
+      ============================= */
 .form-field-container {
   position: relative;
 }
@@ -948,8 +939,7 @@ textarea::placeholder {
 }
 
 /* Form help
-============================= */
-
+      ============================= */
 .form-group .form-help {
   margin: 0;
   line-height: 1.3;
@@ -957,7 +947,7 @@ textarea::placeholder {
   color: var(--color-dark-grey);
   font-size: var(--font-size-small);
   max-height: 0;
-  transition: 0.3s;
+  transition: .3s;
   overflow: hidden;
 }
 
@@ -967,8 +957,7 @@ textarea::placeholder {
 }
 
 /* Form error handling
-============================= */
-
+      ============================= */
 /* The following code is used to place the icon in the after pseudo element. Because after and before are not possible in an input, we need to use a span that will be positioned on the right of our input. */
 
 input:not(:placeholder-shown)~.form-field-icon::after {
@@ -1011,28 +1000,27 @@ textarea:valid:not(:placeholder-shown) {
 }
 
 /*** SEARCH FORM ***/
-
 .form-search {
   display: block;
-  padding: 0.5rem;
+  padding: .5rem 0;
   position: relative;
 }
 
-.search-button {
+.form-search .search-button {
   display: inline-block;
-  background-color: transparent;
+  background: transparent;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-.search-icon {
+.search-button .search-icon {
   fill: var(--color-white);
   width: 1.5rem;
   height: 1.5rem;
 }
 
-input[type=search] {
+.form-search input[type="search"] {
   display: inline-block;
   color: var(--color-white);
   padding-right: 2rem;
@@ -1045,14 +1033,14 @@ input[type=search] {
   background: none;
   cursor: pointer;
   z-index: 3;
-  transition: width 0.4s cubic-bezier(0, 0.795, 0, 1);
+  transition: width .4s cubic-bezier(0, 0.795, 0, 1);
 }
 
-input[type=search]:focus {
+.form-search input[type="search"]:focus {
   position: relative;
   width: 15rem;
   z-index: 1;
-  border-bottom: 0.1rem solid var(--color-grey);
+  border-bottom: .1rem solid var(--color-grey);
   padding: 0;
   cursor: text;
   margin: 0 1rem;
