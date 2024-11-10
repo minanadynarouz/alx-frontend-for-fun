@@ -376,22 +376,21 @@ a:active {
 }
 
 .off-screen {
-  position: absolute;
   left: -100vw;
+  position: absolute;
 }
 
 .skip-link {
   background: var(--color-black);
   color: var(--color-white);
-  position: fixed;
   left: 0;
-  top: 0;
-  padding: 0.7rem;
+  padding: .7rem;
+  position: fixed;
   opacity: 0;
+  top: 0;
   z-index: 10;
   transform: translateY(-1rem);
-  transition: transform 0.2s ease-in-out;
-  transition: opacity 0.2s ease-in-out;
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
 }
 
 .skip-link:focus {
